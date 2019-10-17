@@ -7,29 +7,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/app/material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuThModule } from './modules/au-th/au-th.module';
-import {
-	IgxAvatarModule,
-	IgxBadgeModule,
-	IgxButtonModule,
-	IgxGridModule,
-	IgxIconModule,
-	IgxInputGroupModule,
-	IgxProgressBarModule,
-	IgxRippleModule,
-	IgxSwitchModule
- } from "igniteui-angular";
-import { DataService } from  "src/app/gestions/components/voyage-list/services/data.service";
-import { IgxSparklineCoreModule } from "igniteui-angular-charts/ES5/igx-sparkline-core-module";
-import { IgxSparklineModule } from "igniteui-angular-charts/ES5/igx-sparkline-module";
-import { VoyageListComponent } from './gestions/components/voyage-list/voyage-list.component';
+import { FormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
+
+/* Shared Service */
+import { FormDataService }    from './gestions/components/data/formData.service'
+import { WorkflowService }    from './gestions/components/workflow/workflow.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent,
-    VoyageListComponent
-
-
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -38,21 +26,11 @@ import { VoyageListComponent } from './gestions/components/voyage-list/voyage-li
     MaterialModule,
     AuThModule,
     MaterialModule,
-    IgxAvatarModule,
-	IgxBadgeModule,
-	IgxButtonModule,
-	IgxGridModule,
-	IgxIconModule,
-	IgxInputGroupModule,
-	IgxProgressBarModule,
-	IgxRippleModule,
-  IgxSwitchModule,
-  IgxSparklineCoreModule,
-  IgxSparklineModule,
-
-
+    FormsModule,
+    NgxPaginationModule
   ],
-  providers: [DataService],
+  providers:    [{ provide: FormDataService, useClass: FormDataService },
+    { provide: WorkflowService, useClass: WorkflowService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,246 +1,266 @@
-import {
-  Component,
-  HostListener,
-  NgZone,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from "@angular/core";
-import {
-  IgxGridComponent,
-  IgxNumberSummaryOperand,
-  IgxStringFilteringOperand,
-  IgxSummaryResult
-} from "igniteui-angular";
-import { athletesData } from "src/app/gestions/components/voyage-list/services/data";
-import { DataService } from "src/app/gestions/components/voyage-list/services/data.service";
+import { Component, OnInit, Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { voyage } from './services/voyage.model';
+
+export type SortDirection = 'asc' | 'desc' | '';
+const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
+export const compare = (v1, v2) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+
+export interface SortEvent {
+  column: string;
+  direction: SortDirection;
+}
+interface voyages {
+  ID : number;
+  idVoyage : String;
+  MatriculeT : String;
+  MatriculeR : String;
+  Conducteur : String;
+}
+
+
+export class NgbdSortableHeader {
+
+  @Input() sortable: string;
+  @Input() direction: SortDirection = '';
+  @Output() sort = new EventEmitter<SortEvent>();
+
+  rotate() {
+    this.direction = rotate[this.direction];
+    this.sort.emit({column: this.sortable, direction: this.direction});
+  }
+}
+
 
 @Component({
   selector: 'app-voyage-list',
   templateUrl: './voyage-list.component.html',
-  styleUrls: ['./voyage-list.component.scss']
+  styleUrls: ['./voyage-list.component.css']
 })
-export class VoyageListComponent implements OnInit, OnDestroy {
-
-  @ViewChild("grid1", { read: IgxGridComponent, static: true })
-  public grid1: IgxGridComponent;
-
-  public topSpeedSummary = CustomTopSpeedSummary;
-  public bnpSummary = CustomBPMSummary;
-  public localData: any[];
-  public isFinished = false;
-  private _live = true;
-  private _timer;
-  private windowWidth: any;
-
-  get live() {
-      return this._live;
+@Directive({
+  selector: 'th[sortable]',
+  host: {
+    '[class.asc]': 'direction === "asc"',
+    '[class.desc]': 'direction === "desc"',
+    '(click)': 'rotate()'
   }
+})
+export class VoyageListComponent implements OnInit {
 
-  set live(val) {
-      this._live = val;
-      if (this._live) {
-          this._timer = setInterval(() => this.ticker(), 3000);
-      } else {
-          clearInterval(this._timer);
-      }
-  }
+  @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
 
-  get hideAthleteNumber() {
-      return this.windowWidth && this.windowWidth < 960;
-  }
-  get hideBeatsPerMinute() {
-      return this.windowWidth && this.windowWidth < 860;
-  }
+  voyages : voyage [] = [];
+  idVoyage: string;
+  MatriculeT: string;
+  id: number;
+  Conducteur: string;
+  MatriculeR: string;
 
-  constructor(private zone: NgZone, private dataService: DataService) { }
-
-  public ngOnInit() {
-      const athletes = athletesData;
-
-      for (const athlete of athletes) {
-          this.getSpeed(athlete);
-      }
-
-      this.localData = athletes;
-      this.windowWidth = window.innerWidth;
-      this._timer = setInterval(() => this.ticker(), 3000);
-  }
-
-  public ngOnDestroy() {
-      clearInterval(this._timer);
-  }
-
-  public isTop3(cell): boolean {
-      const top = cell.value > 0 && cell.value < 4;
-      if (top) {
-          cell.row.nativeElement.classList.add("top3");
-      } else {
-          cell.row.nativeElement.classList.remove("top3");
-      }
-      return top;
-  }
-
-  public cellSelection(evt) {
-      const cell = evt.cell;
-      this.grid1.selectRows([cell.row.rowID], true);
-  }
-
-  public getIconType(cell) {
-      switch (cell.row.rowData.Position) {
-          case "up":
-              return "arrow_upward";
-          case "current":
-              return "arrow_forward";
-          case "down":
-              return "arrow_downward";
-      }
-  }
-
-  public getBadgeType(cell) {
-      switch (cell.row.rowData.Position) {
-          case "up":
-              return "success";
-          case "current":
-              return "warning";
-          case "down":
-              return "error";
-      }
-  }
-
-  public getSpeed(athlete: any): any {
-      athlete["Speed"] = this.getSpeedeData(40);
-  }
-
-  public getSpeedeData(minutes?: number): any[] {
-      if (minutes === undefined) {
-          minutes = 20;
-      }
-      const speed: any[] = [];
-      for (let m = 0; m < minutes; m += 3) {
-          const value = this.getRandomNumber(17, 20);
-          speed.push({Speed: value, Minute: m});
-      }
-      return speed;
-  }
-
-  public getRandomNumber(min: number, max: number): number {
-      return Math.round(min + Math.random() * (max - min));
-  }
-
-  @HostListener("window:resize", ["$event"])
-  public onResize(event) {
-      this.windowWidth = event.target.innerWidth;
-  }
-
-  public filter(term) {
-      this.grid1.filter("CountryName", term, IgxStringFilteringOperand.instance().condition("contains"));
-      this.grid1.markForCheck();
-  }
-
-  private ticker() {
-      this.zone.runOutsideAngular(() => {
-          this.updateData();
-          this.zone.run(() => this.grid1.markForCheck());
-      });
-  }
-
-  private generateRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  private updateData() {
-      this.localData.map((rec) => {
-          let val = this.generateRandomNumber(-1, 1);
-          switch (val) {
-              case -1:
-                  val = 0;
-                  break;
-              case 0:
-                  val = 1;
-                  break;
-              case 1:
-                  val = 3;
-                  break;
-          }
-
-          rec.TrackProgress += val;
-      });
-      const unsortedData = this.localData.slice(0);
-
-      this.localData.sort((a, b) => b.TrackProgress - a.TrackProgress).map((rec, idx) => rec.Id = idx + 1);
-      this.localData = this.localData.slice(0);
-
-      // tslint:disable-next-line:prefer-for-of
-      // Browser compatibility: for-of, No support for IE
-      for (let i = 0; i < unsortedData.length; i++) {
-          this.localData.some((elem, ind) => {
-              if (unsortedData[i].Id === elem.Id) {
-                  const position = i - ind;
-
-                  if (position < 0) {
-                      elem.Position = "down";
-                  } else if (position === 0) {
-                      elem.Position = "current";
-                  } else {
-                      elem.Position = "up";
-                  }
-
-                  return true;
-              }
-          });
-      }
-
-      if (this.localData[0].TrackProgress >= 100) {
-          this.live = false;
-          this.isFinished = true;
-      }
-  }
-}
-
-class CustomTopSpeedSummary extends IgxNumberSummaryOperand {
-
+  public maxSize: number = 7;
+  public directionLinks: boolean = true;
+  public autoHide: boolean = false;
+  public responsive: boolean = true;
+  public labels: any = {
+      previousLabel: '<--',
+      nextLabel: '-->',
+      screenReaderPaginationLabel: 'Pagination',
+      screenReaderPageLabel: 'page',
+      screenReaderCurrentLabel: `You're on page`
+  };
+  config = {
+    id: 'custom',
+    itemsPerPage: 15,
+    currentPage: 1,
+    totalItems: this.voyages.length
+  };
   constructor() {
-      super();
+
+   }
+
+   pageChanged(event){
+    console.log(event);
+    this.config.currentPage = event;
   }
 
-  public operate(data?: any[]): IgxSummaryResult[] {
-      const result = [];
-      result.push({
-          key: "average",
-          label: "average",
-          summaryResult: data.length ? IgxNumberSummaryOperand.average(data).toFixed(2) : null
+  ngOnInit() {
+    this.voyages = [
+      {
+        ID : 1,
+        idVoyage : '234567',
+        MatriculeT : '92512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 2,
+        idVoyage : '3456767',
+        MatriculeT : '95512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 3,
+        idVoyage : '678',
+        MatriculeT : '63512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+      {
+        ID : 4,
+        idVoyage : '6784567',
+        MatriculeT : '54512A59',
+        MatriculeR : '784402',
+        Conducteur : 'AHEMD'
+      },
+
+
+    ]
+  }
+
+  Searsh(){
+    if(this.idVoyage != ""){
+      this.voyages = this.voyages.filter(res => {
+        return res.idVoyage.toLocaleLowerCase().match(this.idVoyage.toLocaleLowerCase());
       });
+    }else if(this.idVoyage == ""){
+          this.ngOnInit();
+    }
 
-      return result;
   }
-}
+  SearshByMatricule(){
+    if(this.MatriculeT != ""){
+      this.voyages = this.voyages.filter(res => {
+        return res.MatriculeT.toLocaleLowerCase().match(this.MatriculeT.toLocaleLowerCase());
+      });
+    }else if(this.MatriculeT == ""){
+          this.ngOnInit();
+    }
 
-export class CustomBPMSummary extends IgxNumberSummaryOperand {
+  }
+  onSort({column, direction}: SortEvent) {
+      console.log('goood');
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
 
-  constructor() {
-      super();
+    // sorting countries
+    if (direction === '') {
+      this.voyages = this.voyages;
+    } else {
+      this.voyages = [...this.voyages].sort((a, b) => {
+        const res = compare(a[column], b[column]);
+        return direction === 'asc' ? res : -res;
+      });
+    }
   }
 
-  public operate(data?: any[]): IgxSummaryResult[] {
-      const result = [];
-      result.push(
-          {
-              key: "min",
-              label: "min",
-              summaryResult: IgxNumberSummaryOperand.min(data)
-          }, {
-              key: "max",
-              label: "max",
-              summaryResult: IgxNumberSummaryOperand.max(data)
-          }, {
-              key: "average",
-              label: "average",
-              summaryResult: data.length ? IgxNumberSummaryOperand.average(data).toFixed(2) : null
-          });
-
-      return result;
-  }
 }
 
 

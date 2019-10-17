@@ -6,6 +6,7 @@ import { DragdropComponent } from './components/dragdrop/dragdrop.component';
 import { TableComponent } from './components/table/table.component';
 import { AddressComponent } from './components/address/address.component';
 import { VoyageListComponent } from 'src/app/gestions/components/voyage-list/voyage-list.component';
+import { VoyageComponent } from 'src/app/gestions/components/voyage/voyage.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'table', component: TableComponent },
       { path: 'address', component: AddressComponent },
       { path: 'dragdrop', component: DragdropComponent },
-      { path: 'voyagelist', component: VoyageListComponent }
+      { path: 'voyagelist', component: VoyageListComponent },
+      { path: 'AddOrEditvoyage', loadChildren: 'src/app/gestions/gestions.module#GestionsModule'}
 
 
     ]},
