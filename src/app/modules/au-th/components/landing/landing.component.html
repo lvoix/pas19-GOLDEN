@@ -1,1 +1,13 @@
-<p>landing works!</p>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div>
+            <a href="https://www.goldenway.ma" class="navbar-brand"> <img id="iconimg" src="assets/images/LGW-D.png" /> B GOLDEN WAY TRANSPORT</a></div>
+        <ul class="navbar-nav navbar-collapse justify-content-end">
+           <!--  <li>
+                <a *ngIf="!isLoggedIn" class="nav-link" href="/login">Login</a>
+            </li>  -->
+            <li>
+                <a *ngIf="isLoggedIn" class="nav-link" href="/logout" (click)=handleLogout()>Logout</a>
+            </li>
+        </ul>
+    </nav>
+  <app-login></app-login>

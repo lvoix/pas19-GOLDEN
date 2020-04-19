@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  isLoggedIn = true;
 
-  constructor() { }
+  constructor(
+    //private route: ActivatedRoute,
+    //private router: Router,
+    //private authenticationService: AuthenticationService
+    ) { }
 
   ngOnInit() {
+/*     this.isLoggedIn = this.authenticationService.isUserLoggedIn();
+    console.log('menu ->' + this.isLoggedIn); */
+  }
+
+  handleLogout() {
+   // this.authenticationService.logout();
   }
 
 }

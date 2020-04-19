@@ -1,0 +1,153 @@
+<!-- main app container -->
+<div class="card m-3">
+        <h5 class="card-header">Ajouter un vehicule</h5>
+        <div class="card-body">
+            <form [formGroup]="registerVehiculeForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label>Matricule</label>
+                        <input type="text" formControlName="matricule" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.matricule.errors }" />
+                        <div *ngIf="submitted && f.matricule.errors" class="invalid-feedback">
+                            <div *ngIf="f.matricule.errors.required">matricule is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                        <label>Type</label>
+                        <input type="text" formControlName="vehiculeType" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.vehiculeType.errors }" />
+                        <div *ngIf="submitted && f.vehiculeType.errors" class="invalid-feedback">
+                            <div *ngIf="f.vehiculeType.errors.required"> type is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-4">
+                            <label>Genre</label>
+                            <select formControlName="genre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.genre.errors }">
+                                <option value=""></option>
+                                <option value="0">Tracteur</option>
+                                <option value="1">Remorque</option>
+                                <option value="2">SR</option>
+                            </select>
+                            <div *ngIf="submitted && f.genre.errors" class="invalid-feedback">
+                                <div *ngIf="f.genre.errors.required">genre is required</div>
+                            </div>
+                        </div>
+                </div>
+                <div class="form-row">
+                        <div class="form-group col-4">
+                                <label>Model</label>
+                                <input type="text" formControlName="model" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.model.errors }" />
+                                <div *ngIf="submitted && f.model.errors" class="invalid-feedback">
+                                    <div *ngIf="f.model.errors.required">model is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                    <label>Libelle</label>
+                                    <input type="text" formControlName="libelle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" />
+                                    <div *ngIf="submitted && f.libelle.errors" class="invalid-feedback">
+                                        <div *ngIf="f.libelle.errors.required">Liblle is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-4">
+                                        <label>Status</label>
+                                        <select formControlName="status" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                            <option value=""></option>
+                                            <option value="0">Enable</option>
+                                            <option value="1">Disable</option>
+                                        </select>
+                                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                            <div *ngIf="f.status.errors.required">genre is required</div>
+                                        </div>
+                                    </div>
+                </div>
+                <div class="form-row">
+                        <div class="form-group col-4">
+                                <label>Color</label>
+                                <input type="text" formControlName="vcolor" class="form-control"/>
+                            </div>
+
+                            <div class="form-group col-4">
+                                 <!--    <label>Date mise circulation</label>
+
+                                            <ejs-datetimepicker class="form-control input-group date"  #ejDateTimePicker formControlName="DateMiseCirculation" name="DateMiseCirculation" [placeholder]='placeholder'
+                                              floatLabelType='Auto'>
+                                            </ejs-datetimepicker>  -->
+                                          <!--   <div *ngIf="DateMiseCirculation.invalid && (DateMiseCirculation.dirty||DateMiseCirculation.touched)" class="alert alert-danger">
+                                              Enter Date and time in "MM/dd/yyyy hh:mm a" format.
+                                            </div>  -->
+                                           
+                                                    <label for="miseCirculation">1ère mise en circulation</label>
+                                                    <div class="input-group">
+                                                      <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                                             name="miseCirculation" formControlName = "miseCirculation" ngbDatepicker #miseCirculation="ngbDatepicker" [ngClass]="{ 'is-invalid': submitted && f.miseCirculation.errors }">
+                                                             <div class="input-group-prepend">
+                                                                    <a class="btn btn-outline-secondary calendar" (click) ="miseCirculation.toggle()"><i class="fa fa-calendar"></i></a>
+                                                              </div>
+                                                              <div *ngIf="miseCirculation.invalid && (miseCirculation.dirty||miseCirculation.touched)" class="alert alert-danger">
+                                                                Enter Date and time in "yyyy-MM-dd" format.
+                                                              </div>
+                                                    </div>
+                            </div>
+                            <div class="form-group col-4">
+                                          
+                                             <!--       <label for="updateDateTime">update DateTime</label>
+                                                   <div class="input-group">
+                                                     <input type="date" class="form-control" placeholder="yyyy-mm-dd"
+                                                            name="updateDateTime" formControlName = "updateDateTime" ngbDatepicker #updateDateTime="ngbDatepicker">
+                                                            <div class="input-group-prepend">
+                                                                   <a class="btn btn-outline-secondary calendar" (click) ="updateDateTime.toggle()"><i class="fa fa-calendar"></i></a>
+                                                             </div>
+                                                   </div> -->
+                           </div>
+                </div>
+                <div class="form-row">
+                        <div class="form-group col-6">
+                                <label>Societe</label>
+                                <select formControlName="entites" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.entites.errors }">
+                                    <option value=""></option>
+                           <option *ngFor="let societe of societes" [value]="societe.id">
+                                            {{societe.id}} -- {{societe.name}} -- {{societe.gerant}}
+                                          </option>
+                                </select>
+                                <div *ngIf="submitted && f.entites.errors" class="invalid-feedback">
+                                    <div *ngIf="f.entites.errors.required">Societe is required</div>
+                                </div>
+                            </div>
+                        <div class="form-group col-6">
+                                <label>Email</label>
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                </div>
+                            </div>
+                </div>
+    <!--             
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Password</label>
+                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label>Confirm Password</label>
+                        <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="form-group form-check">
+                    <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                    <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+                    <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1">Register</button>
+                    <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>

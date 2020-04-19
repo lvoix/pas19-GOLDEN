@@ -5,13 +5,16 @@ import { AuThRoutingModule } from './au-th-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { FormsModule} from '@angular/forms';
+import { toDatePipe } from 'src/app/shared/pipe/toDatePipe';
 
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, LandingComponent],
   imports: [
     CommonModule,
-    AuThRoutingModule
+    AuThRoutingModule,
+    FormsModule
   ]
 })
 export class AuThModule { }

@@ -1,23 +1,27 @@
 import { NgModule } from '@angular/core';
-import { VoyageComponent } from './components/voyage/voyage.component';
+import { VoyageComponent } from './operations/voyage/voyage.component';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 /* Feature Components */
-import { PersonalComponent }  from './components/personal/personal.component';
-import { WorkComponent }      from './components/work/work.component';
-import { AddressComponent }   from './components/address/address.component';
-import { ResultComponent }    from './components/result/result.component';
+import { WorkComponent }      from './operations/work/work.component';
+import { AddressComponent }   from './operations/address/address.component';
+import { ResultComponent }    from './operations/result/result.component';
 
 /* Routing Module */
 import { GestionsRoutingModule }   from './gestions-routing.module';
+import { PersonalComponent } from './operations/personal/personal.component';
 
 
 
 @NgModule({
     declarations: [ VoyageComponent , PersonalComponent, WorkComponent, AddressComponent, ResultComponent],
     imports: [
-
-        GestionsRoutingModule
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        GestionsRoutingModule     
     ]
 })
 export class GestionsModule {
