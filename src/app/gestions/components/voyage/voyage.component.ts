@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormDataService } from '../data/formData.service';
-
 @Component({
   selector: 'app-voyage',
   templateUrl: './voyage.component.html',
@@ -17,7 +16,7 @@ export class VoyageComponent implements OnInit {
    formdata;
    constructor(private formDataService: FormDataService) { }
    ngOnInit() {
-    this.formData = this.formDataService.getFormData();
+   /*  this.formData = this.formDataService.getFormData();
     console.log(this.title + ' loaded!');
 
       this.formdata = new FormGroup({
@@ -26,15 +25,15 @@ export class VoyageComponent implements OnInit {
             Validators.pattern("[^ @]*@[^ @]*")
          ])),
          passwd: new FormControl("", this.passwordvalidation)
-      });
+      }); */
    }
-   passwordvalidation(formcontrol) {
+/*    passwordvalidation(formcontrol) {
       if (formcontrol.value.length < 5) {
          return {"passwd" : true};
       }
    }
    onClickSubmit(data) {this.emailid = data.emailid;}
-
+ */
 
 
 }

@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -27,13 +25,12 @@ import { MatSortModule } from '@angular/material/sort';
 import { VoyageListComponent } from 'src/app/gestions/components/voyage-list/voyage-list.component';
 import { FormsModule } from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { VoyageComponent } from 'src/app/gestions/components/voyage/voyage.component';
+
 
 @NgModule({
   declarations: [NavComponent, DashboardComponent, TableComponent, DragdropComponent,
-    AddressComponent, VoyageListComponent, VoyageComponent],
+    AddressComponent, VoyageListComponent],
   imports: [
-    CommonModule,
     NavigationRoutingModule,
     LayoutModule,
     MatToolbarModule,
@@ -53,7 +50,8 @@ import { VoyageComponent } from 'src/app/gestions/components/voyage/voyage.compo
     MatPaginatorModule,
     MatSortModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
   ]
 })
 export class NavigationModule { }

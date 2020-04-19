@@ -7,10 +7,13 @@ import { AddressComponent }     from './components/address/address.component';
 import { ResultComponent }      from './components/result/result.component';
 
 import { WorkflowGuard }        from './components/workflow/workflow-guard.service';
-import { WorkflowService }      from './components/workflow/workflow.service';
+import { VoyageComponent } from './components/voyage/voyage.component';
 
 
-export const appRoutes: Routes = [
+export const appRoutesStep: Routes = [
+  { path: '',  component: PersonalComponent,
+children :[
+    { path: 'voyage',  component: VoyageComponent },
     // 1st Route
     { path: 'personal',  component: PersonalComponent },
     // 2nd Route
@@ -23,10 +26,12 @@ export const appRoutes: Routes = [
     { path: '',   redirectTo: '/personal', pathMatch: 'full' },
     // 6th Route
     { path: '**', component: PersonalComponent }
+  ]},
 ];
 
+
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, { useHash: true} )],
+  imports: [RouterModule.forChild(appRoutesStep)],
   exports: [RouterModule],
   providers: [WorkflowGuard]
 })
