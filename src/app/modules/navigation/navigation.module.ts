@@ -31,7 +31,7 @@ import { VehiculeEditComponent } from 'src/app/gestions/vehicules/vehicule-edit/
 import { VehiculeListComponent } from 'src/app/gestions/vehicules/vehicule-list/vehicule-list.component';
 import { FilterPipeServiceService } from 'src/app/shared/pipe/filter-pipe-service.service';
 import {DataTablesModule} from 'angular-datatables';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { toDatePipe } from 'src/app/shared/pipe/toDatePipe';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ConducteurListComponent } from 'src/app/gestions/conducteurs/conducteur-list/conducteur-list.component';
@@ -64,8 +64,7 @@ import { ConducteurComponent } from 'src/app/gestions/conducteurs/conducteur/con
     MatSortModule,
     FormsModule,
     NgxPaginationModule,
-    CommonModule,
-    NgbModule
+    CommonModule
   ]
 })
 export class NavigationModule { }

@@ -21,7 +21,7 @@ import { VehiculeServiceService } from './shared/vehicule-service.service';
 import { FilterPipeServiceService } from './shared/pipe/filter-pipe-service.service';
 import {DataTablesModule} from 'angular-datatables';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EntitesServiceService } from './shared/entites-service.service';
 import { ServiceGeneralService } from './shared/generalservice/service-general.service';
 
@@ -44,7 +44,6 @@ import { ServiceGeneralService } from './shared/generalservice/service-general.s
     HttpClientModule,
     DataTablesModule,
     DatePickerModule,
-    NgbModule,
     AgmCoreModule.forRoot({
       //AIzaSyAjUHpiDhHJwk0vCMayeOTvEB08RXI1YCg
       apiKey : 'AIzaSyAU8YiIgyLCDlLD5SwXX5RaGMga1Xzx1eI',

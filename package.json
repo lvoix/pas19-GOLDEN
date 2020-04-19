@@ -22,7 +22,6 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
-    "@ng-bootstrap/ng-bootstrap": "^6.0.2",
     "@syncfusion/ej2-angular-calendars": "^18.1.42",
     "@syncfusion/ej2-ng-buttons": "^16.2.50",
     "@types/googlemaps": "^3.39.3",
