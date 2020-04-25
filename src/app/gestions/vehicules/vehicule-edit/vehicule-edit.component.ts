@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { VehiculeServiceService } from 'src/app/shared/vehicule-service.service';
-import { EntitesServiceService } from 'src/app/shared/entites-service.service';
+import { VehiculeServiceService } from 'src/app/shared/Sgestionnaire/vehicule-service.service';
+import { EntitesServiceService } from 'src/app/shared/Sgestionnaire/entites-service.service';
 import { ServiceGeneralService } from 'src/app/shared/generalservice/service-general.service';
 
 

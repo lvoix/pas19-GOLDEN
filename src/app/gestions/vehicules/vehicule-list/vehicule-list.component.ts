@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChildren, QueryList, Directive, Input, EventEmitter, Output} from '@angular/core';
 //, 
-import { VehiculeServiceService, Vehicule } from 'src/app/shared/vehicule-service.service';
+import { VehiculeServiceService, Vehicule } from 'src/app/shared/Sgestionnaire/vehicule-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 export type SortDirection = 'asc' | 'desc' | '';

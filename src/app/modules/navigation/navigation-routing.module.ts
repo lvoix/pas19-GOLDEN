@@ -21,7 +21,7 @@ const routes: Routes = [
       { path: 'vehiculeslist', component: VehiculeListComponent},
       { path: 'vehicule', component: VehiculeComponent},
       { path: 'vehicule/:editv', component: VehiculeEditComponent},
-      { path: 'conducteurslist', component: ConducteurListComponent, canActivate : [AuthGuardService]},
+      { path: 'conducteurslist', component: ConducteurListComponent},
       { path: 'conducteur', component: ConducteurComponent},
       { path: 'conducteur/:editv', component: ConducteurEditComponent},
       { path: 'table', component: TableComponent },

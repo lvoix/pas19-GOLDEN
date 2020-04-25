@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { FormData } from '../data/formData.model';
 import { FormDataService } from '../data/formData.service';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/shared/Sgestionnaire/auth.service';
 
 @Component ({
     selector:'mt-wizard-result',

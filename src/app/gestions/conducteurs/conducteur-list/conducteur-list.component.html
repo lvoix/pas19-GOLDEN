@@ -1,1 +1,126 @@
-<p>conducteur-list works!</p>
+<div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title ">List des conducteurs</h4>
+                            <p class="card-category"> Les employes avec/sans Engagement</p>
+                        </div>
+    
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table  class="table table-striped table-bordered table-sm row-border hover" show-filter="true">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Nom Prenom 
+                                        </th>
+                                        <th>
+                                            CNI 
+                                        </th>
+                                        <th>
+                                            CNSS
+                                        </th>
+                                        <th>
+                                            N passeport
+                                        </th>
+                                        <th>
+                                            Type
+                                        </th>
+                                        <th>
+                                            Societe
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                        <th><a class="btn btn-sm btn-success text-white" (click) ="AddOrEditConducteurs(null, IdConducteur)"><i class="fa fa-plus"></i> Add</a></th>
+                                    </thead>
+                                    <tbody *ngIf="listconducteurs?.content">
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr *ngFor="let conducteur of listconducteurs.content; let j = index">
+                                            <td filter="{ 'id': 'text' }">{{conducteur.id}}</td>
+                                            <td>{{conducteur.lastName}} {{conducteur.firstName}}</td>
+                                            <td>{{conducteur.cni}}</td>
+                                            <td class="text-primary">{{conducteur.cnss}}</td>
+                                            <td>{{conducteur.npasseport}}</td>
+                                            <td>{{conducteur.conducteurType}}</td>
+                                            <td>{{conducteur.entite.name}}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-info" (click) ="AddOrEditConducteurs(j, conducteur)">Edit</button>
+                                                <button class="btn btn-sm btn-danger" (click)="deletConducteur(conducteur)">Delete</button></td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                        <br>
+         <!--  <div class="center-pagination">
+                                <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+                                        <div class="custom-pagination">
+                                          <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+                                            <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+                                              <
+                                                </span>
+                                            </div>
+                                            <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                                                  <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+                                                <div *ngIf="p.getCurrent() === page.value">
+                                                  <span>{{ page.label }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="pagination-next" [class.disabled]="p.isLastPage()">
+                                              <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
+                                            </div>
+                                        </div>
+                                    
+                                      </pagination-template>
+                                    </div>  -->
+                      <!--               <div class="card-footer pb-0 pt-3">
+                                        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+                                                <a routerLink [queryParams]="{ page: 1 }" class="page-link">First</a>
+                                            </li>
+                                            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+                                                <a routerLink [queryParams]="{ page: pager.currentPage - 1 }" class="page-link">Previous</a>
+                                            </li>
+                                            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+                                                <a routerLink [queryParams]="{ page: page }" class="page-link">{{page}}</a>
+                                            </li>
+                                            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+                                                <a routerLink [queryParams]="{ page: pager.currentPage + 1 }" class="page-link">Next</a>
+                                            </li>
+                                            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+                                                <a routerLink [queryParams]="{ page: pager.totalPages }" class="page-link">Last</a>
+                                            </li>
+                                        </ul>
+                                    </div> -->
+                                    <!-- <jw-pagination [items]="conducteurs" (changePage)="onChangePage($event)"></jw-pagination> -->
+    
+                                    <nav aria-label="...">
+                                        <ul style="margin-left: 180px;margin-top:-10px;" class="pagination"  *ngIf="listconducteurs?.content" >
+                                            <li (click)="onSelect(selectedPage - 1)" [ngClass]="{disabled:selectedPage  === 0}" class="page-item next-item">
+                                                <a class="page-link">Prev</a>
+                                            </li>                                           <li *ngFor="let page of ' '.repeat(listconducteurs.totalPages).split(''), let i = index " (click)="onSelect(i)" [class.active]="i === selectedPage" class="page-item"><a class="page-link">{{i}}</a></li>
+                                          <!-- <li  (click)="onSelect(i+1)" class="page-item"><a class="page-link">Next</a></li> -->
+                                           <li (click)="onSelect(selectedPage + 1)" [ngClass]="{disabled:selectedPage + 1 === listconducteurs.totalPages}" class="page-item next-item">
+                                            <a class="page-link">Next</a>
+                                        </li> 
+                                        </ul>
+                                      </nav>
+                    </div>
+                    </div>
+                          <div class="fab" routerLink="/home/conducteur"> + </div>
+                </div>
+            </div>
+        </div>
+      </div>

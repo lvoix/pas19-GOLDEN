@@ -21,7 +21,8 @@ import { PersonalComponent } from './operations/personal/personal.component';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        GestionsRoutingModule     
+        GestionsRoutingModule,
+         
     ]
 })
 export class GestionsModule {

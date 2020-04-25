@@ -4,7 +4,7 @@ import { Personal } from '../data/formData.model';
 import { FormDataService } from '../data/formData.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/shared/Sgestionnaire/auth.service';
 
 @Component ({
     selector: 'mt-wizard-personal'

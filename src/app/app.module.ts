@@ -17,12 +17,12 @@ import { JwtInterceptor } from './shared/_helpers/jwt.Interceptor'
 import {} from 'googlemaps';
 import { from } from 'rxjs';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { VehiculeServiceService } from './shared/vehicule-service.service';
+import { VehiculeServiceService } from './shared/Sgestionnaire/vehicule-service.service';
 import { FilterPipeServiceService } from './shared/pipe/filter-pipe-service.service';
 import {DataTablesModule} from 'angular-datatables';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
 //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { EntitesServiceService } from './shared/entites-service.service';
+import { EntitesServiceService } from './shared/Sgestionnaire/entites-service.service';
 import { ServiceGeneralService } from './shared/generalservice/service-general.service';
 
 @NgModule({
