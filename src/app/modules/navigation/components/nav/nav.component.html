@@ -3,41 +3,34 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar >Menu</mat-toolbar>
+    <mat-toolbar> Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/home/dashboard"><mat-icon matListIcon class="app-nav-list-icon"><i class="fa fa-pencil"></i></mat-icon>Dashboard</a>
-      <a mat-list-item routerLink="/home/vehiculeslist"> <mat-icon matListIcon class="app-nav-list-icon"><i class="fa fa-car"></i></mat-icon> Vehicules</a>
-      <a mat-list-item routerLink="/home/conducteurslist"><mat-icon matListIcon class="app-nav-list-icon"><i class="fa fa-user"></i></mat-icon>Conducteurs</a>
-      <a mat-list-item routerLink="/home/voyagelist">Operations</a>
-      <a mat-list-item routerLink="/home/facturation">Facturation</a>
-      <a mat-list-item routerLink="/home/table">Table</a>
-      <a mat-list-item routerLink="/home/address">Address</a>
-      <a mat-list-item routerLink="/home/dragdrop">Drag and Drop</a>
-      <a mat-list-item (click)="drawer.toggle()" ><mat-icon matListIcon class="app-nav-list-icon"><i class="fa fa-close"></i></mat-icon>Close</a>
+      <a mat-list-item  class="active item-link" routerLink="/home/dashboard"> <mat-icon>dashboard</mat-icon>Dashboard</a>
+      <a mat-list-item  class="item-link" routerLink="/home/vehiculeslist"> <mat-icon> directions_car</mat-icon> Vehicules</a>
+      <a mat-list-item  class="item-link" routerLink="/home/conducteurslist"><mat-icon>account_box</mat-icon> <span class="item-text">Conducteurs</span></a>
+      <a mat-list-item  class="item-link" routerLink="/home/clientslist"><mat-icon>account_box</mat-icon> <span class="item-text">Clients</span></a>
+      <a mat-list-item  class="item-link" routerLink="/home/operations"> <mat-icon>swap_horizontal_circle</mat-icon>Operations</a>
+      <a mat-list-item  class="item-link" routerLink="/home/facturation"> <mat-icon>collections</mat-icon>Facturation</a>
+      <a mat-list-item  class="item-link" routerLink="/home/address"><mat-icon> home </mat-icon>Address</a>
+      <a mat-list-item  class="item-link" routerLink="/home/dragdrop"><mat-icon>drag_indicator</mat-icon>Drag and Drop</a>
+      <a mat-list-item  class="item-link" routerLink="/home/services"><mat-icon>drag_indicator</mat-icon>Services</a>
+      <a mat-list-item  class="item-link" routerLink="/home/users"><mat-icon>account_box</mat-icon>Utilisateurs</a>
+      <a mat-list-item  class="item-link" routerLink="/home/dragdrop"><mat-icon>settings_applications</mat-icon> Settings</a>
+    
+      <a mat-list-item  class="item-link" (click)="drawer.toggle()" ><mat-icon>close</mat-icon>Close</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-      <div style="height: 88vh;">
-<!--     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>PAS19</span>
-    </mat-toolbar> -->
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
+      <div style="height: 92vh;">
+     <mat-toolbar color="primary">
+      <mat-toolbar-row class="item-link">
         <button mat-icon-button>
           <mat-icon (click)="drawer.toggle()">menu</mat-icon>
         </button>
         <span>PAS19 -</span>
         <h1>SimpleCRM</h1>
-        <span class="menu-spacer"></span>
-        <div>
+           
+        <!-- <div>
           <a mat-button [routerLink]="'/accounts'"> Operations </a>
           <a mat-button [routerLink]="'/create-operation'"> Fait Operation </a>
           <a mat-button [routerLink]="'/vehicules'"> Vehicules </a>
@@ -47,17 +40,17 @@
           <a mat-button [routerLink]="'/activities'"> Activities </a>
           <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
           <a mat-button [routerLink]="'/facturation'"> Facturation </a>
-    
-        </div>
+        </div> -->
       </mat-toolbar-row>
     
-      <mat-toolbar-row>
-          <span style="font-size: 12px;">SimpleCRM helps you easily manage your business</span>
+      <mat-toolbar-row class="item-link">
+          <span style="font-size: 14px;text-align: center">SimpleCRM helps you easily manage your business</span>
         </mat-toolbar-row>
-    </mat-toolbar>
+    </mat-toolbar> 
     
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

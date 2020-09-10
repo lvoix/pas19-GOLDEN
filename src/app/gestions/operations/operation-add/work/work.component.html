@@ -1,0 +1,131 @@
+<form #workForm="ngForm" class="editForm" novalidate>
+    <div class="form-horizontal">
+        <div class="tab-pane">
+            <h4 class="head text-center">{{title}}</h4>
+            <br/>
+            <div class='row'>
+                
+                    <div class='col-sm-4'>
+                            <div class="">
+                                <label for="Conducteurs1">Conducteurs 1</label>
+                                <select  class="form-control" #conducteurs1="ngModel" required id="Conducteurs1" name="Conducteurs1" placeholder="Conducteur 1" [(ngModel)]="work.conducteurs1">
+                              <option *ngFor="let condu of conducteur" [ngValue]="condu"> {{condu.lastName}} {{condu.firstName}}</option>
+                              </select>
+                            </div>
+                    </div>
+                  <div class='col-sm-4'>
+                            <div class="">
+                                    <label for="Conducteurs">Conducteurs 2</label>
+                                    <select  class="form-control"  #conducteurs2="ngModel" id="Conducteurs2" name="Conducteurs2" placeholder="Conducteur 2" [(ngModel)]="work.conducteurs2">
+                                  <option *ngFor="let cond of conducteur" [ngValue]="cond"> {{cond.lastName}} {{cond.firstName}} </option>
+                                  </select>
+                            </div>
+                    </div> 
+                    <div class='col-sm-4'>
+                        <div class="">
+                            <label for="Client"> Client </label>
+                            <select  class="form-control" #beneficiaire="ngModel" required id="beneficiaire" name="beneficiaire" placeholder="client " [(ngModel)]="work.beneficiaire">
+                          <option *ngFor="let cl of beneficiares" [ngValue]="cl"> {{cl.name}} </option>
+                          </select>
+                        </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class='col-sm-4'>
+                        <div>
+                        <label class="control-label" for="prixEuro">Prix EURO</label>
+                        <input class="form-control input-md"  #prixEuro="ngModel"  id="prixEuro" name="prixEuro"  placeholder="Prix Euro" [(ngModel)]="work.prixEuro">
+                        </div>
+                        <!-- <div *ngIf="DotationEURO.errors?.pattern"> 
+                            DotationEURO not valid.
+                         </div>  -->
+                </div>
+                <div class='col-sm-4'>
+                    <div>
+                    <label class="control-label" for="prixDH">Prix DH</label>
+                    <input class="form-control input-md"  #prixDH="ngModel" id="prixDH" name="prixDH" placeholder="Prix DH" [(ngModel)]="work.prixDH">
+                    </div>
+            </div>
+                <div class='col-sm-4'>
+                    <div>
+                    <label class="control-label" for="motifprix">Motif prix</label>
+                    <input class="form-control input-md"  #motifprix="ngModel" id="motifprix" name="motifprix" type="text" placeholder="motif prix " [(ngModel)]="work.motifprix">
+                    </div>
+            </div>
+                </div>
+                <div class="row">
+                    <div class='col-sm-4'>
+                        <div>
+                        <label class="control-label" for="dotationEuro">Dotation EURO</label>
+                        <input class="form-control input-md"  #dotationEuro="ngModel"  id="dotationEuro" name="dotationEuro"  placeholder="Dotation Euro" [(ngModel)]="work.dotationEuro">
+                        </div>
+                        <!-- <div *ngIf="DotationEURO.errors?.pattern"> 
+                            DotationEURO not valid.
+                         </div>  -->
+                </div>
+                <div class='col-sm-4'>
+                    <div>
+                    <label class="control-label" for="dotationDH">Dotation DH</label>
+                    <input class="form-control input-md"  #dotationDH="ngModel" id="dotationDH" name="dotationDH" placeholder="Dotation DH" [(ngModel)]="work.dotationDH">
+                    </div>
+            </div>
+                <div class='col-sm-4'>
+                    <div>
+                    <label class="control-label" for="motifClient">Motif Client</label>
+                    <input class="form-control input-md"  #motifClient="ngModel" id="motifClient" name="motifClient" type="text" placeholder="motif Client " [(ngModel)]="work.motifClient">
+                    </div>
+            </div>
+                </div>
+                <div class="row">
+                        <br/>
+                        <br/>
+
+                        <!-- orders items table -->
+    <table class="table table-borderless">
+            <thead class="thead-light">
+                <th>Id</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Lieu</th>
+                <th>Motif</th>
+                <th>Prix</th>
+                <th>Devise</th>
+                <th><a class="btn btn-sm btn-success text-white" (click) ="AddOrEditDepnce(null, Service.formData.DepenceId)"><i class="fa fa-plus"></i> Add Depence</a></th>
+            </thead>
+            <tr *ngIf="Service.DepencesAll.length == 0">
+                <td class="font-italic text-center" colspan="5"> No Found depence selected for this depart.</td>
+              </tr>
+            <tbody>
+                <tr *ngFor="let item of Service.DepencesAll; let i=index;">
+                  <td>{{ i }}</td>
+                  <td>{{ item.Date | toDate }}</td>
+                  <td>{{ item.Type }}</td>
+                  <td>{{ item.Lieu }}</td>
+                  <td>{{ item.Motif }}</td>
+                  <td>{{ item.Prix }}</td>
+                  <td>{{ item.Devise }}</td>
+                  <td>
+                    <a class="btn btn-sm btn-info text-white" (click) ="AddOrEditDepnce(i, Service.formData.DepenceId)"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-sm btn-danger text-white ml-1" (click) ="OndeleteDepence(i, Service.formData.DepenceId)"><i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+            </tbody>
+        </table>
+
+                </div>
+        <!--     <div class="row zonebtn">
+                    <div class='col-sm-4'>
+                <button class="btn btn-default" (click)="goToPrevious(workForm)"> Previous</button>
+            </div>
+            <div class='col-sm-4'>
+               <button class="btn btn-outline-rounded btn-info" [disabled]="!workForm.valid" (click)="goToNext(workForm)"> Next <span style="margin-left:10px;" class="glyphicon glyphicon-arrow-right"></span></button> 
+                <a routerLink="/home/AddOrEditvoyage/voyage/address"> <button  [disabled]="!workForm.valid"  (click)="goToNext(workForm)" class="btn btn-success" > Next </button></a>
+            </div>
+            </div> -->
+            <div class="form-group text-center space-20">
+                    <a routerLink="/home/operations/add/personal"> <button class="btn btn-outline-primary" (click)="goToPrevious(workForm)"> <span style="margin-right:10px;"></span> Previous</button></a>
+                    <a routerLink="/home/operations/add/address"> <button class="btn btn-outline-success" [disabled]="!workForm.valid" (click)="goToNext(workForm)">  <span style="margin-left:10px;"></span> Next</button></a>
+                </div>
+        </div>
+    </div>
+</form>

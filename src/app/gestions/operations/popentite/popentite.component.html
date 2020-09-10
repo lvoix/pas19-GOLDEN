@@ -1,0 +1,21 @@
+<h4> Entites ! </h4>
+<hr>
+<form  #form="ngForm" autocomplete="off" (submit) ="onSubmit(form)">
+  <div class="form-group">
+    <label for="EntiteID">Entite</label>
+    <select  name="EntiteID" class="form-control" (change)="UploadEntiteID($event.target)">
+        <option value="0"> ---Select---</option>
+        <option *ngFor="let item of entites" [value]="item.id"> {{ item.abr }} - {{ item.name }} </option>
+    </select>
+</div>
+<h4> Infos supplementaires ! </h4>
+<hr>
+
+
+<div class="form-group">
+  <button type="submit" class="btn btn-dark" > <i class="fa fa-database"></i> Submit</button>
+  <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]> <i class="fa fa-close"></i> Close</button>
+
+</div>
+</form> 
+

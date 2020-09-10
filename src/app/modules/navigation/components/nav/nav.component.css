@@ -1,13 +1,21 @@
+
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .sidenav-container {
   height: 100%;
 }
 
 .sidenav {
-  width: 200px;
+  width: 300px;
 }
 
 .sidenav .mat-toolbar {
   background: inherit;
+  text-align: center;
 }
 
 .mat-toolbar.mat-primary {
@@ -15,3 +23,22 @@
   top: 0;
   z-index: 1;
 }
+.menu-name{
+  text-align: center;
+}
+
+.mat-list-item-content { /* This rule does NOT work !!! */
+  padding: 0;
+}
+
+.item-link {
+  border: 1px solid gray;
+  padding: 0;
+}
+
+.item-text {
+  text-align: center;
+  margin: 0;
+}
+/* style="background-color: red;" */
+

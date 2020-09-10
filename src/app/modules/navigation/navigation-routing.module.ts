@@ -13,14 +13,18 @@ import { VehiculeEditComponent } from 'src/app/gestions/vehicules/vehicule-edit/
 import { ConducteurListComponent } from 'src/app/gestions/conducteurs/conducteur-list/conducteur-list.component';
 import { ConducteurComponent } from 'src/app/gestions/conducteurs/conducteur/conducteur.component';
 import { ConducteurEditComponent } from 'src/app/gestions/conducteurs/conducteur-edit/conducteur-edit.component';
+import { OperationsComponent } from 'src/app/gestions/operations/operations/operations.component';
+import { OperationComponent } from 'src/app/gestions/operations/operation/operation.component';
 
 const routes: Routes = [
   { path: '', component: NavComponent,
     children :[
+      { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'vehiculeslist', component: VehiculeListComponent},
       { path: 'vehicule', component: VehiculeComponent},
       { path: 'vehicule/:editv', component: VehiculeEditComponent},
+      { path: 'operation/:edito', component: OperationComponent},
       { path: 'conducteurslist', component: ConducteurListComponent},
       { path: 'conducteur', component: ConducteurComponent},
       { path: 'conducteur/:editv', component: ConducteurEditComponent},
@@ -28,7 +32,8 @@ const routes: Routes = [
       { path: 'address', component: AddressComponent },
       { path: 'dragdrop', component: DragdropComponent },
       { path: 'voyagelist', component: VoyageListComponent , canActivate : [AuthGuardService]},
-      { path: 'AddOrEditvoyage', loadChildren: 'src/app/gestions/gestions.module#GestionsModule'}
+      { path: 'operations', component : OperationsComponent},
+      { path: 'operations/add', loadChildren: 'src/app/gestions/gestions.module#GestionsModule'}
     ]},
 
 ];

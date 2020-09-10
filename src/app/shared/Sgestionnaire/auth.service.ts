@@ -75,7 +75,7 @@ UpFile (){
     var token = localStorage.getItem('token');
     console.log('tokennnn storage', token);
     const  headers = new  HttpHeaders().set('token', token);
-    headers.set('Content-Type', 'application/json');
+    headers.set('Content-Type', 'multipart/form-data');
     console.log('headers storage', headers);
     return headers;
 }

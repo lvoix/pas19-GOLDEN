@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Entite } from './entites-service.service';
 import { Observable } from 'rxjs';
-
+import { map } from 'rxjs/operators';
+import { IVehicule } from 'src/app/gestions/vehicules/vehicule.model';
+import { createRequestOption } from '../util/request-util';
+type EntityArrayResponseType = HttpResponse<IVehicule[]>;
 export class Vehicule{
   constructor(
     public id:string,
@@ -26,14 +29,13 @@ export class Vehicule{
 })
 export class VehiculeServiceService {
   Uvehicule = 'vehicules';
-  constructor(private http: HttpClient ) { }
+  public resourceUrl = environment.apiVL + this.Uvehicule;
+  constructor(private http: HttpClient ) { 
+  }
 
   GetAllVehicules() {
     let params = new HttpParams();
-    //params = params.append('foo', 'moo');
-    //params = params.append('limit', '100');
     params = params.append('page', '2');
-   // params = params.append('size', '60');
 
     return this.http.get<Vehicule[]>(environment.apiVL + this.Uvehicule, {params : params});
   }
@@ -41,10 +43,7 @@ export class VehiculeServiceService {
     // get page of items from api
     return this.http.get<any>(environment.apiVL + this.Uvehicule+'?pageNo='+page+'&pageSize='+size)
    }
-  /* query(req?: any): Observable<EntityArrayRe> {
-    const options = createRequestOption(req);
-    return this.http.get<Vehicule[]>(environment.apiVL + this.Uvehicule, { params: options, observe: 'response' });
-  } */
+   
   public deleteVehicule(vehicule) {
     return this.http.delete<Vehicule>(environment.apiVL + this.Uvehicule + '/' + vehicule.id);
   }
@@ -56,6 +55,16 @@ export class VehiculeServiceService {
     return this.http.put<Vehicule>(environment.apiVL + this.Uvehicule, vehicule);
 
   }
+  query(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<any>(this.resourceUrl, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+    return res;
+  }
+
   public ConvertENUMStringToInt1(vehicule){
     if(vehicule.genre == 'TRACTEUR')
       vehicule.genre = '0';
@@ -76,4 +85,6 @@ export class VehiculeServiceService {
         }
     return vehicule;
   }
+
+ 
 }

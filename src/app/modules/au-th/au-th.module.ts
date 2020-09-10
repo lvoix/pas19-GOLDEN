@@ -6,7 +6,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { FormsModule} from '@angular/forms';
-import { toDatePipe } from 'src/app/shared/pipe/toDatePipe';
 
 
 @NgModule({

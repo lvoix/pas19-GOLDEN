@@ -1,0 +1,125 @@
+<form #personalForm="ngForm" class="editForm" novalidate>
+        <div class="tab-pane">
+            <h4 class="head text-center">{{title}}</h4>
+            <br/>
+            <div class='row'>
+                <div class='col-sm-12'>
+    
+                    <div class="row">
+                        <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                                <label class="control-label" for="ndossier">N Dossier</label>
+                                <input class="form-control input-md" pattern="[0-9]{6}" #ndossier="ngModel" required id="ndossier" name="ndossier" type="text" placeholder="Numero dossier" [(ngModel)]="personal.ndossier">
+                                <div class="alert alert-danger" [hidden]="ndossier.valid">N dossier is required</div>
+                            </div>
+                            <div *ngIf="ndossier.errors?.pattern"> 
+                                Numero dossier not valid are have six number.
+                             </div> 
+                        </div>
+                        <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                            <label for="datedepart">Date de depart</label>
+                            <input type="date" name="datedepart" class="form-control input-md" #datedepart="ngModel" required id="datedepart" placeholder="Date de depart" [(ngModel)]="personal.datedepart">
+                          </div>
+                        </div>
+                        <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                            <label for="dateFin">Date de Fin</label>
+                            <input type="date" name="dateFin" class="form-control input-md" #dateFin="ngModel" id="dateFin" placeholder="Date de fin" [(ngModel)]="personal.dateFin">
+                          </div>
+                        </div>
+                        <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                                <label class="control-label" for="refChargement">Ref de Chargement</label>
+                                <input class="form-control input-md" #refChargement="ngModel" id="refChargement" name="refChargement" type="text" placeholder="Ref Chargement" [(ngModel)]="personal.refChargement">
+                                <!-- <div class="alert alert-danger" [hidden]="RefChargement.valid">Ref Chargement is required</div> -->
+                            </div>
+                        </div>
+                   </div>
+    
+                    <div class="row">
+                     <div class='col-xs-12 col-sm-3'>
+                        <div class="form-group">
+                        <label for="operationtype">Type de l'operation</label>
+                        <select  class="form-control" #operationtype="ngModel" required id="operationtype" name="operationtype" placeholder="Operation type" [(ngModel)]="personal.operationtype">
+                      <option *ngFor="let obj of typesVoyage" value="{{obj.name}}"> {{obj.name}}</option>
+                      </select>
+                      </div>
+                    </div>
+                    <div class='col-xs-12 col-sm-3'>
+                        <div class="form-group">
+                        <label for="tracteurs">Tracteur</label>
+                        <select  class="form-control" #tracteurs="ngModel" required id="tracteurs" name="tracteurs" placeholder="Tracteur" [(ngModel)]="personal.tracteurs">
+                                <option *ngFor="let te of tracteur"  [ngValue]="te"> {{te.matricule}}</option>
+
+                      </select>
+                      </div>
+                    </div>
+                    <div class='col-xs-12 col-sm-3'>
+                        <div class="form-group">
+                        <label for="Remorques">Remorque</label>
+                        <select  class="form-control" #remorques="ngModel" required id="Remorques" name="Remorques" placeholder="Remorque" [(ngModel)]="personal.remorques">
+                      <option *ngFor="let re of remorque"  [ngValue]="re"> {{re.matricule}}</option>
+                      </select>
+                      </div>
+                    </div>
+                    <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                                <label class="control-label" for="typeMarchandises">Nature de marchandises</label>
+                                <input class="form-control input-md" #typeMarchandises="ngModel" id="typeMarchandises" name="typeMarchandises" type="text" placeholder="Type de marchandises" [(ngModel)]="personal.typeMarchandises">
+                                <!-- <div class="alert alert-danger" [hidden]="RefChargement.valid">Ref Chargement is required</div> -->
+                            </div>
+                        </div>
+                 <!--        <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                                <label class="control-label" for="firstname">First Name</label>
+                                <input class="form-control input-md" #firstname="ngModel" required id="firstname" name="firstname" type="text" placeholder="First Name" [(ngModel)]="personal.firstName">
+                                <div class="alert alert-danger" [hidden]="firstname.valid">First Name is required</div>
+                            </div>
+                        </div> -->
+                 <!--        <div class='col-xs-12 col-sm-3'>
+                            <div class="form-group">
+                                <label class="control-label" for="lastname">Last Name</label>
+                                <input class="form-control input-md" #lastname="ngModel" required id="lastname" name="lastname" type="text" placeholder="Last Name" [(ngModel)]="personal.lastName">
+                                <div class="alert alert-danger" [hidden]="lastname.valid">Last Name is required</div>
+                            </div>
+                        </div> -->
+                    </div>
+    
+                    <!--     <div class="row">
+                    <div class='col-xs-12 col-sm-6'>
+                    <div class="form-group">
+                        <label class="control-label" for="email">Email</label>
+                        <input class="form-control input-md" #email="ngModel" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" id="email" name="email" type="text" placeholder="Email" [(ngModel)]="personal.email">
+                        <div class="alert alert-danger" [hidden]="email.valid">Email is required and must be valid</div>
+                    </div>
+                  </div>
+               <div class='col-xs-12 col-sm-6'>
+                     <div class="form-group">
+                        <label class="control-label" for="File">File</label>
+                      <input class="form-control"type="file" #fileimport="ngModel" [(ngModel)]="personal.fileimport" required id="fileimport" name="fileimport" />
+                  </div>
+                  <div class="card p-4">
+                      <div class="form-group">
+                        <label class="h4 mb-3" for="">Show your picture in Personnel</label>
+                        <input type="file" class="form-control-file" (change)="fileChanged($event)" aria-describedby="fileHelpId">
+                      </div>
+                      <img *ngIf="personal.fileimport" [src]="personal.fileimport" class="img-thumbnail">
+                    </div>
+                </div>
+              </div>-->
+                    <div class="form-group text-center">
+                        <!-- <button class="btn btn-success btn-outline-rounded btn-info" [disabled]="!personalForm.valid" (click)="goToNext(personalForm)"> Next <span style="margin-left:10px;" class="glyphicon glyphicon-arrow-right"></span></button> -->
+                        <a  routerLink="/home/operations/add/work"> <button [disabled]="!personalForm.valid" (click)="goToNext(personalForm)" class="btn btn-outline-success" > Next </button></a>
+                        <!-- <button (click)="generatePdf()" class="btn btn-primary d-flex align-items-center justify-content-center"> <span>Print PDF</span></button> -->
+                        <!-- <button (click)="UploadFile()" class="btn btn-primary d-flex align-items-center justify-content-center"> <span>Upload File</span></button> -->
+    
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </form>
+    
+
+    

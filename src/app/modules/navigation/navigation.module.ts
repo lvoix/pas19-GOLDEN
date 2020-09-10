@@ -37,11 +37,26 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ConducteurListComponent } from 'src/app/gestions/conducteurs/conducteur-list/conducteur-list.component';
 import { ConducteurEditComponent } from 'src/app/gestions/conducteurs/conducteur-edit/conducteur-edit.component';
 import { ConducteurComponent } from 'src/app/gestions/conducteurs/conducteur/conducteur.component';
+import { MatDividerModule, MatDialogModule } from '@angular/material';
+import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
+import {HighchartsChartModule} from 'highcharts-angular';
+import { AreaComponent } from 'src/app/shared/components/area/area.component';
+import { MyFilterPipe } from 'src/app/shared/pipes/MyFilterPipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';   //Import here
+import { OperationsComponent } from 'src/app/gestions/operations/operations/operations.component';
+import { FormDataService } from 'src/app/gestions/operations/operation-add/data/formData.service';
+import { WorkflowService } from 'src/app/gestions/operations/operation-add/workflow/workflow.service';
+import { OperationComponent } from 'src/app/gestions/operations/operation/operation.component';
+import { AddfileComponent } from 'src/app/shared/components/addfile/addfile.component';
 
 @NgModule({
   declarations: [NavComponent, DashboardComponent, TableComponent, DragdropComponent,
     AddressComponent, VoyageListComponent, VehiculeComponent, VehiculeEditComponent, VehiculeListComponent, FilterPipeServiceService,
-     toDatePipe, JwPaginationComponent, ConducteurListComponent, ConducteurComponent, ConducteurEditComponent],
+     toDatePipe, JwPaginationComponent, ConducteurListComponent, ConducteurComponent, ConducteurEditComponent, FooterComponent, AreaComponent,
+     OperationsComponent,
+     OperationComponent,
+     AddfileComponent,
+    MyFilterPipe],
   imports: [
     DataTablesModule,
     NavigationRoutingModule,
@@ -49,6 +64,7 @@ import { ConducteurComponent } from 'src/app/gestions/conducteurs/conducteur/con
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
+    MatDividerModule,
     MatIconModule,
     MatListModule,
     MatGridListModule,
@@ -65,7 +81,15 @@ import { ConducteurComponent } from 'src/app/gestions/conducteurs/conducteur/con
     FormsModule,
     NgxPaginationModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    HighchartsChartModule,
+    FontAwesomeModule
+  ],
+  providers:   
+   [ 
+    { provide: FormDataService, useClass: FormDataService },
+    { provide: WorkflowService, useClass: WorkflowService }
+
   ]
 })
 export class NavigationModule { }

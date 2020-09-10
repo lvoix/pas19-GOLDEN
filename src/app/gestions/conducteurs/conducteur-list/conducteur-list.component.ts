@@ -18,6 +18,7 @@ export class ConducteurListComponent implements OnInit {
     currentPage: 1,
     totalItems: this.conducteurs.length
   };
+  filterBetweenTwoDate:any ={'startDate' : '2020-04-01' , 'endDate': '2020-04-30'};
   constructor(private conducteurService: ServiceConducteurService, private router : Router,
     private route: ActivatedRoute) { }
 

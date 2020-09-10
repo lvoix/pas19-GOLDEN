@@ -1,16 +1,16 @@
 import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PersonalComponent }    from './operations/personal/personal.component';
-import { WorkComponent }        from './operations/work/work.component';
-import { AddressComponent }     from './operations/address/address.component';
-import { ResultComponent }      from './operations/result/result.component';
-import { WorkflowGuard }        from './operations/workflow/workflow-guard.service';
-import { VoyageComponent } from './operations/voyage/voyage.component';
+import { PersonalComponent }    from './operations/operation-add/personal/personal.component';
+import { WorkComponent }        from './operations/operation-add/work/work.component';
+import { AddressComponent }     from './operations/operation-add/address/address.component';
+import { ResultComponent }      from './operations/operation-add/result/result.component';
+import { WorkflowGuard }        from './operations/operation-add/workflow/workflow-guard.service';
+import { VoyageComponent } from './operations/operation-add/voyage/voyage.component';
 import { CommonModule } from '@angular/common';
 
 
 export const appRoutesStep: Routes = [
-  {  path: 'voyage',  component: VoyageComponent,
+  {  path: '',  component: VoyageComponent,
 children :[
     // 1st Route
     { path: 'personal',  component: PersonalComponent },

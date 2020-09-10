@@ -1,0 +1,135 @@
+<div class="pmb-block">
+
+    <div class="block-header">
+        <!-- BEGIN FILE ATTACH-->
+        <div class="card-bod">
+      <!--       <div class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-success waves-effect" (click)="attach()">Validate</button>
+                </div>
+            </div> -->
+            <div class="row">
+<!--               <div> Id operation  <span>{{operation}} </span></div>
+ -->                <div *ngFor="let progressInfo of progressInfos" class="mb-2">
+                    <span>{{ progressInfo.fileName }}</span>
+                    <div class="progress">
+                      <div
+                        class="progress-bar progress-bar-info progress-bar-striped"
+                        role="progressbar"
+                        attr.aria-valuenow="{{ progressInfo.value }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        [ngStyle]="{ width: progressInfo.value + '%' }"
+                      >
+                        {{ progressInfo.value }}%
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <label class="btn btn-default">
+                    <input type="file" multiple (change)="selectFiles($event)" />
+                  </label>
+                  
+                  <button
+                    class="btn btn-success"
+                    [disabled]="!selectedFiles"
+                    (click)="uploadFiles()"
+                  >
+                    Upload
+                  </button>
+                  
+                  <div class="alert alert-light" role="alert">{{ message }}</div>
+                <!--   <div *ngFor="let previewUrl of selectedFiles">
+                    <div class="image-preview mb-3" *ngIf="previewUrl">
+                      <img [src]="preview(previewUrl)" height="100" />                 
+                  </div>
+                  </div> -->
+              
+            </div>
+        </div>
+        <!-- END FILE ATTACH-->
+    </div>
+
+    <br/>
+    <br/>
+<!--     <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-vmiddle" show-filter="true">
+                    <tr *ngFor="let w of data; let i = index">
+                        <td data-title="'ID'">
+                            {{ w.id }}
+                        </td>
+                        <td data-title="'Document title'">
+                            {{ w.name }}
+                        </td>
+                        <td data-title="'Uploaded By'">
+                            {{ w.creator.name }}
+                        </td>
+                        <td data-title="'Creation date'">
+                            {{ w.creationDate | date : 'dd/MM/yyyy' }}
+                        </td>
+                        <td data-title="'Actions'">
+                            <a href="{{ picturePath + w.id }}" target="_blank" class="btn btn-info waves-effect"><i class="zmdi zmdi-zoom-in zmdi-hc-fw"></i></a>
+                            <a class="btn btn-danger waves-effect" (click)="deleteAttach( w.id )" ><i class="zmdi zmdi-delete zmdi-hc-fw"></i></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div> -->
+
+</div>
+
+  
+  <div class="card">
+    <div class="card-header">List of Files</div>
+<!--     <ul
+      class="list-group list-group-flush"
+      *ngFor="let file of fileInfos | async"
+    >
+      <li class="list-group-item">
+        <a href="{{ file.path }}">{{ file.name }}</a>
+      </li>
+    </ul> -->
+    <div class="col-md-12 mt-6">
+			<table class="table">
+				<thead>
+					<tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Extention</th>
+						<th>Size</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of fileInfos | async">
+						<td>
+							{{ item?.name }}
+            </td>
+            <td>
+							{{ item?.entityType }}
+            </td>
+            <td>
+							{{ item?.extention }}
+						</td>
+						<td>
+							{{ item?.size/1024/1024 | number:'.2' }} MB
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+         <span class="glyphicon glyphicon-trash"></span> 
+         Remove
+        </button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+  </div>
+
+
+

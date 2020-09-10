@@ -40,8 +40,7 @@ export class VehiculeEditComponent implements OnInit {
           miseCirculation:['', Validators.required],
           dateCreation:[{value: '', disabled: true}],
           entites:['', Validators.required],
-          email: ['', [Validators.required, Validators.email]],
-         
+          email: ['', [Validators.required, Validators.email]]    
   },{
   });
     this.entiteservice.GetAllEntites().subscribe(
@@ -49,7 +48,6 @@ export class VehiculeEditComponent implements OnInit {
      );
     this.route.paramMap.subscribe(params => {
       this.editvehicule = JSON.parse(atob(params.get('editv')));
-      console.log('entre router'+this.route);
       this.editvehicule = this.vehiculeservice.ConvertENUMStringToInt1(this.editvehicule);
       this.editvehicule = this.vehiculeservice.ConvertENUMStringToInt2(this.editvehicule);
       this.EditVehiculeForm.controls["entites"].setValue(this.editvehicule.entites.id);
@@ -61,7 +59,6 @@ export class VehiculeEditComponent implements OnInit {
       this.EditVehiculeForm.disable();
       this.di = true;
       console.log(' data ici edit', this.editvehicule);
-     // console.log(' data ici edit date time ', this.EditVehiculeForm.value.updateDateTime);
 
     });
     

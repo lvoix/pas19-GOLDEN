@@ -24,6 +24,8 @@ export class FilterPipeServiceService implements PipeTransform{
   }  */
   transform(items: any, filter: any, defaultFilter: boolean): any {
     console.log('Ok filter'+ JSON.stringify(filter));
+    console.log('Ok defaultFilter'+ defaultFilter);
+
     //console.log('Ok items'+ JSON.stringify(items));
 
     if (!filter){

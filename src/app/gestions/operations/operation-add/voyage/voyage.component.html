@@ -1,0 +1,101 @@
+
+<div>
+        <div class="">
+            <div class="board">
+                <!-- Navigation Area (Circular Tabs) -->
+                <div class="board-inner" id="status-buttons">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <div class="liner"></div>
+                            <li class="active">
+                                    <a routerLink="/home/operations/add/personal" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-toggle="tab" title="personal">
+                                        <span class="round-tabs one">
+                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                            </span>
+                                    </a>
+                                </li>
+                          
+                                <!-- circular tasks icon -->
+                                 <li>
+                                    <a routerLink="/home/operations/add/work" routerLinkActive="active" data-toggle="tab" title="work">
+                                        <span class="round-tabs two">
+                                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                          
+                                        </span>
+                                    </a>
+                                </li>
+                          
+                                <!-- circular home icon -->
+                                <li>
+                                    <a routerLink="/home/operations/add/address" routerLinkActive="active" data-toggle="tab" title="address">
+                                        <span class="round-tabs three">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            </span>
+                                    </a>
+                                </li>
+                          
+                                <!-- circular ok icon -->
+                                <li>
+                                    <a routerLink="/home/operations/add/result" routerLinkActive="active" data-toggle="tab" title="completed">
+                                        <span class="round-tabs four">
+                                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                            </span>
+                                    </a>
+                                </li>       
+                           
+                                    
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    
+                    <!-- Close the Splash screen -->
+                    <script src="assets/js/loading-bars.js"></script>
+
+                <!-- End Navigation Area (Circular Tabs) -->
+      
+                <!-- Content Area -->
+                <div class="tab-content">
+                    <!-- Nested view  -->
+                    <router-outlet></router-outlet>
+                </div>
+                <!-- End Content Area -->
+            </div>
+      
+            <!-- For Debugging: show our valid formData -->
+            <pre>{{ formData | json }}</pre>
+        </div>
+    </div>
+
+<!-- <section style="background:#efefe9;">
+    <div class="container">
+        <div class="board"> -->
+            <!-- Navigation Area (Circular Tabs) -->
+
+            <!-- End Navigation Area (Circular Tabs) -->
+
+            <!-- Content Area -->
+
+            <!-- End Content Area -->
+        <!-- </div> -->
+
+        <!-- For Debugging: show our formData as it is being typed -->
+  <!--       <pre></pre>
+    </div>
+</section> -->
+<!--
+<div>
+  <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)">
+     <input type = "text" class = "fortextbox" name = "emailid"
+        placeholder = "emailid" formControlName = "emailid">
+     <br/>
+
+     <input type = "password" class = "fortextbox" name = "passwd"
+        placeholder = "passwd" formControlName = "passwd">
+     <br/>
+
+     <input type = "submit" [disabled] = "!formdata.valid" class = "forsubmit"
+        value = "Log In">
+  </form>
+</div>
+<p> Email entered is : {{emailid}} </p>  container-->
+
+      

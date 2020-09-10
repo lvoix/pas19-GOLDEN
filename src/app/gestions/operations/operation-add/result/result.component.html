@@ -1,0 +1,241 @@
+<div class="tab-pane">
+    <h3 class="head text-center">{{title}}</h3>
+    <h4 class="text-center">
+        <!-- Made with <i class="fa fa-heart heart" style="color:#f48260;"></i> by <a href="https://www.cc28tech.com" target="_blank">Cathy Wun</a>. Check out the tutorials <a href="https://www.cc28tech.com/angular-multi-step-part-1" target="_blank">here.</a> -->
+    </h4>
+    <p class="narrow text-center">
+      Voici une copie des informations que vous avez entrées:
+    </p>
+    <div class='row'>
+
+        <div class="col-6">
+                <div class="row">
+                <div class="col">
+                      
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+                <div class='col'>
+                    <div class="form-group">
+                        <label class="control-label" for="email">Type de l'Operation:</label>
+                    </div>
+                </div>
+                <div class='col'>
+                    {{formData.operationtype}}
+                </div>
+            </div>       
+             </div>
+
+        </div>
+   
+    <div class="col">
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+                    <div class='col'>
+                        <div class="form-group">
+                            <label class="control-label" for="conducteurs1">Conducteurs 1:</label>
+                        </div>
+                    </div>
+                    <div class='col'>
+                        {{formData.conducteurs1.firstName}}
+                        {{formData.conducteurs1.lastName}}
+                    </div>
+                </div>
+            </div>
+        </div> 
+    
+        </div>
+        <div class="row">
+                <div class="col">
+                      
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+                <div class='col-xs-1 col-sm-8'>
+                    <div class="form-group">
+                        <label class="control-label" for="typeMarchandises">Nature de marchandises:</label>
+                    </div>
+                </div>
+                <div class='col'>
+                    {{formData.typeMarchandises}}
+                </div>
+            </div>       
+             </div>
+
+        </div>
+   
+    <div class="col">
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+
+                    <div class='col'>
+                        <div class="form-group">
+                            <label class="control-label" for="conducteurs2">Conducteurs 2:</label>
+                        </div>
+                    </div>
+                    <div class='col'>
+                            {{formData.conducteurs2.firstName}}
+                            {{formData.conducteurs2.lastName}}
+                    </div>
+                </div>
+            </div>
+        </div> 
+    
+        </div>
+
+        <div class="row">
+                <div class="form-group">
+                <label class="control-label" for="adrC">Les adresses du chargement:</label>
+                </div> 
+                <div class="card-body">
+                        <div class="table-responsive">
+                            <table  class="table table-striped table-bordered table-sm row-border hover" show-filter="true">
+                                <thead class=" text-primary">
+                                    <th>ID</th>
+                                    <th> Nom client</th>
+                                    <th> ville</th>
+                                    <th> zip</th>
+                                    <th> Pays</th>
+                                    <th> Type station</th> 
+                                </thead>
+                                <tbody *ngIf="formData.adressesLoad">
+                                    <tr *ngFor="let adr of formData.adressesLoad ; let i = index ">
+                                        <td>{{i}}</td>
+                                        <td>{{adr.nomClient}}</td>
+                                        <td>{{adr.city}}</td>
+                                        <td>{{adr.zipCode}}</td>
+                                        <td>{{adr.country}}</td>
+                                        <td>{{adr.typeStation}}</td>
+                               <!--          <td>
+                                            <button class="btn btn-sm btn-info" (click) ="AddOrEditAdrs(i, adr)">Edit</button>
+                                            <button class="btn btn-sm btn-danger" (click)="deletAdresse(adr)">Delete</button></td> -->
+                                        </tr>
+                                </tbody>
+                            </table>
+                    </div>             
+                </div>   
+            
+        </div>
+
+
+        </div>
+ 
+        <div class="col-6">
+                <div class="row">
+                <div class="col">
+                      
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+                <div class='col'>
+                    <div class="form-group">
+                        <label class="control-label" for="tracteurs">Tracteur:</label>
+                    </div>
+                </div>
+                <div class='col'>
+                    {{formData.tracteurs.matricule}}
+                </div>
+            </div>       
+             </div>
+
+        </div>
+   
+    <div class="col">
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+
+                    <div class='col'>
+                        <div class="form-group">
+                            <label class="control-label" for="email">Ref du chargmenet:</label>
+                        </div>
+                    </div>
+                    <div class='col'>
+                        {{formData.refChargement}}
+                    </div>
+                </div>
+            </div>
+        </div> 
+    
+        </div>
+
+        <div class="row">
+                <div class="col">
+                      
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+                <div class='col'>
+                    <div class="form-group">
+                        <label class="control-label" for="remorques">Remorque:</label>
+                    </div>
+                </div>
+                <div class='col'>
+                    {{formData.remorques.matricule}}
+                </div>
+            </div>       
+             </div>
+
+        </div>
+   
+    <div class="col">
+        <div class='col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-8 col-md-offset-4 col-md-8'>
+                <div class="row">
+
+                    <div class='col'>
+                        <div class="form-group">
+                            <label class="control-label" for="email">Type de l'Operation:</label>
+                        </div>
+                    </div>
+                    <div class='col'>
+                        {{formData.operationtype}}
+                    </div>
+                </div>
+            </div>
+        </div> 
+    
+        </div>
+
+
+        <div class="row">
+                <div class="form-group">
+                <label class="control-label" for="adrL">Les adresses du livraison:</label>
+                </div>
+                <div class="card-body">
+                        <div class="table-responsive">
+                            <table  class="table table-striped table-bordered table-sm row-border hover" show-filter="true">
+                                <thead class=" text-primary">
+                                    <th>ID</th>
+                                    <th> Nom client</th>
+                                    <th> ville</th>
+                                    <th> zip</th>
+                                    <th> Pays</th>
+                                    <th> Type station</th> 
+                                </thead>
+                                <tbody *ngIf="formData.adressesLivraison">
+                                    <tr *ngFor="let adr of formData.adressesLivraison ; let j = index ">
+                                        <td>{{j}}</td>
+                                        <td>{{adr.nomClient}}</td>
+                                        <td>{{adr.city}}</td>
+                                        <td>{{adr.zipCode}}</td>
+                                        <td>{{adr.country}}</td>
+                                        <td>{{adr.typeStation}}</td>
+                                      <!--   <td>
+                                            <button class="btn btn-sm btn-info" (click) ="AddOrEditAdrs(j, adr)">Edit</button>
+                                            <button class="btn btn-sm btn-danger" (click)="deletAdresse(adr)">Delete</button></td>-->
+                                        </tr> 
+                                </tbody>
+                            </table>
+                    </div>             
+                </div>   
+
+        </div>
+        </div>
+
+
+
+
+
+    
+    </div>
+    <br>
+    <div class="text-center">
+         <a routerLink="/home/operations/add/address"> <button class="btn btn-outline-primary btn-result" (click)="goToPrevious()"> <span style="margin-right:10px;"></span> Previous</button></a>
+        <button class="btn btn-success btn-result" [disabled]="!isFormValid" (click)="submit()"> Submit <span style="margin-left:10px;" class=""></span></button>
+    </div>
+</div>

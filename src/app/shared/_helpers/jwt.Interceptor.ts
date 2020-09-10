@@ -14,7 +14,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(request : HttpRequest<any>, next : HttpHandler): Observable<HttpEvent<any>> 
     {
-        console.log('arrrivee  JwtInterceptor');
+         console.log('arrrivee  JwtInterceptor');
         // add authorization header with jwt token if available
         let currentuser = this.acct.isLoggesIn;
         let token = localStorage.getItem('jwt');
@@ -25,6 +25,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
         if (currentuser && token !== undefined) 
         {
+            console.log('entre pas pr arrrivee  request' );
             request = request.clone({
                 setHeaders: 
                 {
@@ -35,7 +36,8 @@ export class JwtInterceptor implements HttpInterceptor {
      
         }
         console.log('arrrivee  request'+ JSON.stringify(request) );
-        return next.handle(request);
+        return next.handle(request); 
+     
         
    
     }

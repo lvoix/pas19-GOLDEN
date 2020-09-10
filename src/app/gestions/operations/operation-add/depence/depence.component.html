@@ -1,0 +1,82 @@
+<h4> Depence Prix/Frais ! </h4>
+<hr>
+<form  #form="ngForm" autocomplete="off" (submit) ="onSubmit(form)">
+    <input type="hidden"  name="DepenceId" #DepenceId ="ngModel" class="form-control" [(ngModel)]="formData.DepenceId">
+    <div class="form-row">
+  <div class="form-group col-md-6">
+    <label for="Type">Type</label>
+    <select  name="Type" #Type ="ngModel" class="form-control" [(ngModel)]="formData.Type" 
+    [class.is-invalid] = "!isValid && formData.Type ==0">
+        <option value="0"> ---Select---</option>
+        <!-- <option *ngFor="let item of ItemList" value="{{ item.itemId }}"> {{ item.itemName }} </option> -->
+        <option  value="PRIX"> Prix </option>
+        <option  value="PRIXALL"> Prix All in</option>
+        <option  value="PRIXLIBRE"> Prix Libre</option>
+        <option  value="FRAISP"> Frais a plus </option>
+        <option  value="FRAISB"> Frais de bateau </option>
+        <option  value="FRAIST"> Frais de Transitaire </option>
+        <option  value="FRAISG"> Frais de GAZOIL </option>
+        <option  value="FRAISD"> Frais de deplacement </option>
+        <option  value="AUTRE"> AUTRE </option>
+
+    </select>
+</div>
+<div class="form-group col-md-6">
+    <label for="Date">Date </label>
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd" name="Date" [(ngModel)]="formData.Date" ngbDatepicker #Date="ngbDatepicker">
+             <div class="input-group-prepend">
+                    <a class="btn btn-outline-secondary calendar" (click) ="Date.toggle()"><i class="fa fa-calendar"></i></a>
+              </div>
+    </div>
+  </div> 
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Lieu">Lieu</label>
+      <div class="input-group">
+          <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input name="Lieu" #Lieu ="ngModel" class="form-control" [(ngModel)]="formData.Lieu"/>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+            <label for="Motif">Motif</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Motif</div>
+                  </div>
+                  <input name="Motif" #Motif ="ngModel" class="form-control" [(ngModel)]="formData.Motif"/>
+            </div>
+    </div>
+    </div> 
+
+<div class="form-row">
+<div class="form-group col-md-6">
+  <label for="Prix">Prix</label>
+  <div class="input-group">
+      <div class="input-group-prepend">
+          <div class="input-group-text">$</div>
+        </div>
+        <input name="Prix" #Prix ="ngModel" class="form-control" [(ngModel)]="formData.Prix"/>
+  </div>
+</div> 
+<div class="form-group col-md-6">
+        <label for="Devise">Devise</label>
+        <select  name="Devise" #Devise ="ngModel" class="form-control" [(ngModel)]="formData.Devise" >
+            <option value="0"> ---Select---</option>
+            <option value="EURO"> EURO</option>
+            <option value="DH"> DH</option>
+            <option value="Dollar"> Dollar</option>
+        </select>
+    </div> 
+</div>
+ 
+<div class="form-group">
+  <button type="submit" class="btn btn-dark" > <i class="fa fa-database"></i> Submit</button>
+  <button type="button" class="btn btn-outline-dark ml-1" [mat-dialog-close]> <i class="fa fa-close"></i> Close</button>
+
+</div>
+</form>
+
